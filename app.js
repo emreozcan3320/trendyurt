@@ -1,31 +1,53 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var cors = require ('cors');
+'use strict';
 
-var app = express();
+const app = require('express')(),
+    config = require('./config/config');
 
-mongoose.connect('mongodb://localhost/haberon1');
+//EXpress config
+require('./config/express.config')(app);
 
-mongoose.Promise = global.Promise;
+//Mongoose config
+require('./config/mongoose.config')(config);
 
-// On Connection
-mongoose.connection.on('connected', function() {
-    console.log('Connected to database ');
+app.listen(config.dev.port, () => {
+    console.log("listening...");
 });
 
-// On Error
-mongoose.connection.on('error', function(err) {
-    console.log('Database error: ' + err);
-});
-//mongoose promises
-mongoose.Promise = global.Promise;
-
-app.use(cors());
-
-app.use(bodyParser.json());
 
 
-app.listen(3000,function(){
-  console.log("connected port 3000");
-});
+
+
+
+
+
+
+// const mongoose = require('mongoose');
+// const bodyParser = require('body-parser');
+// const cors = require ('cors');
+//
+// var app = express();
+//
+// mongoose.connect('mongodb://localhost/haberon1');
+//
+// mongoose.Promise = global.Promise;
+//
+// // On Connection
+// mongoose.connection.on('connected', function() {
+//     console.log('Connected to database ');
+// });
+//
+// // On Error
+// mongoose.connection.on('error', function(err) {
+//     console.log('Database error: ' + err);
+// });
+// //mongoose promises
+// mongoose.Promise = global.Promise;
+//
+// app.use(cors());
+//
+// app.use(bodyParser.json());
+//
+//
+// app.listen(3000,function(){
+//   console.log("connected port 3000");
+// });
