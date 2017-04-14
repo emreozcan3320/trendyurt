@@ -11,7 +11,13 @@ module.exports = (app) => {
     app.use(cors());
 
     //[*]Routes Configuration
-     let student = require('../conponents/student/student.js');
-    app.use('/student',student);
+    let main = require('../conponents/main/main');
+    app.use('/', main);
+
+    let students = require('../conponents/student/student.js');
+    app.use('/students', students);
+
+    let superAdmins = require('../conponents/superAdmin/superAdmin.js');
+    app.use('/superAdmins', superAdmins);
 
 };
